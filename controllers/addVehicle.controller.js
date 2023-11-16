@@ -56,6 +56,7 @@ router.post('/vehicleModel', async (req, res) => {
 router.post('/vehicleBooking', async (req, res) => {
 
     let { user_first, user_last, vehicle_id, start_date, end_date } = req.body
+
     const pool = await sql.connect(config)
 
     if (user_first === null || user_first === undefined, user_first.trim() === "") {
@@ -70,6 +71,27 @@ router.post('/vehicleBooking', async (req, res) => {
 
     if (vehicle_id === null || vehicle_id === undefined) {
         res.status(400).send({ error: true, message: "vehicle model is required" })
+        return
+    }
+
+    let checkOverlap = await pool.request()
+        .input('vehicle_id', sql.Int, vehicle_id)
+        .input('newStartDate', sql.DateTime, start_date)
+        .input('newEndDate', sql.DateTime, end_date)
+        .query(`
+                SELECT *
+                FROM Rentals
+                WHERE (
+                        (r_start_date <= @newEndDate AND r_end_date >= @newStartDate) OR
+                        (r_start_date <= @newStartDate AND r_end_date >= @newEndDate) OR
+                        (r_start_date >= @newStartDate AND r_end_date <= @newEndDate)
+                    ) AND r_vehicle_id =  @vehicle_id;
+                `)
+
+    console.log(checkOverlap)
+
+    if(checkOverlap.rowsAffected[0]){
+        res.status(409).send({error: false, message: 'Bookings exist for this vehicle at the selected time. Choose another.'})
         return
     }
 
@@ -93,15 +115,11 @@ router.post('/vehicleBooking', async (req, res) => {
                     INSERT INTO Rentals(r_vehicle_id, r_user_id, r_start_date, r_end_date)
                     VALUES (@vehicle_id, @user_id, @start_date, @end_date);
 
-                    UPDATE Vehicles SET vehicle_availability = 0 WHERE vehicle_id = @vehicle_id
-
-                    select * from Rentals where rental_id = (select max(rental_id) from Rentals)
+                    SELECT * FROM Rentals WHERE rental_id = (SELECT MAX(rental_id) FROM Rentals)
                 `)
 
-    res.status(200).send({ error: false, message: 'Booking confirm !', data: addBooking.recordsets[0]})
+    res.status(200).send({ error: false, message: 'Booking confirm !', data: addBooking.recordsets[0] })
     return
-
-
 
 })
 
