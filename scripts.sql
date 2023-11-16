@@ -37,3 +37,12 @@ values
 	('Sedan',4),
 	('Cruiser',2),
 	('Sports',2)
+
+
+insert into Vehicles(vehicle_type_id, vehicle_model)
+values
+	(1,'Maruti Baleno'),
+	(2,'Tata Nexon'),
+	(3,'Honda City'),
+	(4,'Jawa. 831'),
+	(5,'KTM. RC 125')

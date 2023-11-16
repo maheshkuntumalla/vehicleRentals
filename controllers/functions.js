@@ -1,25 +1,6 @@
-const express = require('express')
-const app = express()
-const sql = require('mssql')
-const config = require('./config')
-const port = 3000
-require('dotenv').config()
 const cron = require('cron');
-
-
-app.use(express.json())
-
-sql.connect(config, function (err) {
-
-    if (err) console.log(err);
-    else {
-        console.log('Connected to SQL Server');
-    }
-
-});
-
-const mainRoute = require('./route')
-app.use('/api', mainRoute)
+const config = require('../config');
+const sql = require('mssql');
 
 const checkRentalAvailability = async () => {
     const currentDate = new Date();
@@ -41,12 +22,9 @@ const checkRentalAvailability = async () => {
     }
   };
   
-  const cronJob = new cron.CronJob('14 49 0 * * *', checkRentalAvailability);
+  const cronJob = new cron.CronJob('13 55 0 * * *', checkRentalAvailability);
   cronJob.start();
 
+  console.log("hi")
 
-app.listen(port, (error) => {
-    if (!error) {
-        console.log(`server is listening on port ${port}`)
-    }
-})
+  module.exports = {checkRentalAvailability}
