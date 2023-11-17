@@ -88,7 +88,6 @@ router.post('/vehicleBooking', async (req, res) => {
                     ) AND r_vehicle_id =  @vehicle_id;
                 `)
 
-    console.log(checkOverlap)
 
     if(checkOverlap.rowsAffected[0]){
         res.status(409).send({error: false, message: 'Bookings exist for this vehicle at the selected time. Choose another.'})

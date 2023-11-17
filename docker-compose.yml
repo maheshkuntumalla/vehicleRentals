@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  db:
+    build: ./db
+    environment:
+      SA_PASSWORD: mahe@123
+      ACCEPT_EULA: Y
+      MSSQL_PID: Developer
+    ports:
+      - "1433:1433"
+    restart: always
+
+  web:
+    build: .
+    environment:
+      DB_CONNECTION_STRING: Server=db;User Id=sa;Password=mahe@123;
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    restart: on-failure

@@ -8,14 +8,22 @@ require('dotenv').config()
 
 app.use(express.json())
 
-sql.connect(config, function (err) {
+// During Dockerization DB connection will take some time to connect, thats why i am trying reconnect Node with DB for every 5 seconds
+function connectWithRetry(){
+    return sql.connect(config,(err) => {
+ 
+         if (err) {
+             console.log(`Connection to DB failed, retry in 5s `,err.message)
+             sql.close()
+             setTimeout(connectWithRetry, 5000);
+         }
+         else {
+             console.log('Connected to SQL Server successfully');
+         }
+     }); 
+ }
 
-    if (err) console.log(err);
-    else {
-        console.log('Connected to SQL Server');
-    }
-
-});
+ connectWithRetry()
 
 const mainRoute = require('./route')
 app.use('/api', mainRoute)

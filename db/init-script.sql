@@ -1,3 +1,4 @@
+
 CREATE TABLE Users (
   u_id INT PRIMARY KEY IDENTITY(1,1),
   u_first_name NVARCHAR(100) NOT NULL,
