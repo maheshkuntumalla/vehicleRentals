@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "bce98e25-4911-4e0a-b7c8-7b36a8edb0a5",
+		"name": "vehicle rental",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19359874",
+		"_collection_link": "https://interstellar-firefly-386940.postman.co/workspace/Zoomium-Team~14d5a975-2aa1-4a1c-91c2-832a513e209c/collection/19359874-bce98e25-4911-4e0a-b7c8-7b36a8edb0a5?action=share&source=collection_link&creator=19359874"
+	},
+	"item": [
+		{
+			"name": "getWheels",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/get/noWheels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"get",
+						"noWheels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getType",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type_wheelcount\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/get/vehicleType",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"get",
+						"vehicleType"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addModel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type_id\": 5,\r\n    \"model\" : \"KTM. RC 125\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/add/vehicleModel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"add",
+						"vehicleModel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getModels",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type_id\" : 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/get/vehicleModel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"get",
+						"vehicleModel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addRentals",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_first\" : \"mahe2\",\r\n    \"user_last\" : \"k\",\r\n    \"vehicle_id\" : 2,\r\n    \"start_date\" : \"01-12-2023\",\r\n    \"end_date\" : \"02-12-2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/add/vehicleBooking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"add",
+						"vehicleBooking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "runScripts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/run/scripts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"run",
+						"scripts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
