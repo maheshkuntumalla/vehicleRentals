@@ -1,6 +1,6 @@
 # vehicleRentals
 
-## set up to run the server on Docker container
+## Set up to run the server on Docker container
 Clone this repository as it is and run the following command
 ```
 docker-compose up
@@ -14,10 +14,14 @@ Now import the postman connection into your postman tool and try to hit the foll
 ```
 http://localhost:3000/api/run/scripts
 ```
+### After loading this is how the
+
+![databasedata](https://github.com/maheshkuntumalla/vehicleRentals/assets/87142618/983e659d-a42d-481a-94e4-70b89f3d1725)
+
 That's it, now you can make the requests that are provided in the postman collection.
 
-## set up to run the server on Locally
-For you need to install MSSQL server in your local system and you have to create sa user in the sql server. After that change the .env file with all your details.and run following command
+## Set up to run the server on Locally
+For this you need to install MSSQL server in your local system and you have to create sa user in the sql server. After that change the .env file with all your details.and run following command
 ```
 npm start
 ```
